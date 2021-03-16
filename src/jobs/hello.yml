@@ -1,15 +1,45 @@
 description: >
-  Sample description
-# What will this job do?
-# Descriptions should be short, simple, and clear.
+  Sample CloudQA suite execution.
 
-executor: default
+executor: 
+  name: default
+  tag: <<parameters.tag>>
 
 parameters:
-  to:
-    type: string
-    default: "World"
-    description: "Hello to whom?"
+      suite-id:
+        type: string
+        description: ID of the CloudQA suite to execute.
+      browser:
+        type: string
+        description: (optional) Modify the browser to execute your suite against, defaults to `Chrome`.
+        default: 'Chrome'
+      build-tag:
+        type: string
+        description: (optional) Modify the build tag to set build id of your suite, defaults to ``.
+        default: ''
+      base-url:
+        type: string
+        description: (optional) Modify the base url to execute your suite against, defaults to ``.
+        default: ''
+      variables:
+        type: string
+        description: (optional) Modify the variables to set variables of your suite, defaults to ``.
+        default: ''
+      is-sequential-execution:
+        type: boolean
+        description: (optional) Modify the is sequential execution to execution type(sequential, parallel) of your suite, defaults to `true`.
+        default: true
+      environment-name:
+        type: string
+        description: (optional) Modify the environment name to execute your suite against, defaults to ``.
+        default: ''
+        
 steps:
   - greet:
-      to: << parameters.to >>
+      suite-id: << parameters.suite-id >>
+      browser: << parameters.browser >>
+      build-tag: << parameters.build-tag >>
+      base-url: << parameters.base-url >>
+      variables: << parameters.variables >>
+      is-sequential-execution: << parameters.is-sequential-execution >>
+      environment-name: << parameters.environment-name >>
