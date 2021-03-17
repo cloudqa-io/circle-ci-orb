@@ -5,7 +5,8 @@ description: >
   CLOUDQA_API_KEY will be pulled from the CiricleCI build environment variables.
   Your build status depends on the test suite status.
 
-executor: default
+docker:
+  - image: 'cimg/base:<<parameters.image>>'
 
 parameters:
   suite-id:
@@ -31,6 +32,11 @@ parameters:
     type: string
     description: (optional) Modify the environment name to execute your suite against, defaults to ``.
     default: ''
+  image:
+    type: string
+    descripting: >
+      The Docker image for this job environment. CircleCI's `cimg/base:stable` will be used by default. Find other comptable images and tags here: https://hub.docker.com/u/cimg
+    default: cimg/base:stable
 
 environment:
   CLOUDQA_SUITE_ID: << parameters.suite-id >>
