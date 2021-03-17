@@ -1,5 +1,5 @@
 description: >
-  This is a sample executor using Ubuntu Docker image.
+  This is a executor using Ubuntu Docker image.
 docker:
   - image: 'cimg/base:<<parameters.tag>>'
 parameters:

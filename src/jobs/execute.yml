@@ -1,10 +1,9 @@
 description: >
-  Sample CloudQA suite execution.
-  Trigger your CloudQA test suite from a CircleCI build, passing `suite-id`,
-  optional `browser`, optional `build-tag`, optional `base-url`, optional `variables`,
-  optional `is-sequential-execution` and optional `environment-name` required for your suite.
-  By default the $CLOUDQA_API_KEY will be pulled from the environment variables.
-  the test suite runner will pass or fail your build with the status of your suite.
+  Trigger your CloudQA test suite from CircleCI build by passing parameters "API Key","Suite Id",
+  "Browser (optional)","Tag (optional)","Variables (optional)",
+  "Sequential Execution (optional)" and "Environment Name (optional)".
+  CLOUDQA_API_KEY will be pulled from the CiricleCI build environment variables.
+  Your build status depends on the test suite status.
 
 executor: default
 
@@ -19,10 +18,6 @@ parameters:
   build-tag:
     type: string
     description: (optional) Modify the build tag to set build id of your suite, defaults to ``.
-    default: ''
-  base-url:
-    type: string
-    description: (optional) Modify the base url to execute your suite against, defaults to ``.
     default: ''
   variables:
     type: string
@@ -41,12 +36,12 @@ environment:
   CLOUDQA_SUITE_ID: << parameters.suite-id >>
   CLOUDQA_BROWSER: << parameters.browser >>
   CLOUDQA_BUILD_TAG: << parameters.build-tag >>
-  CLOUDQA_BASE_URL: << parameters.base-url >>
   CLOUDQA_VARIABLES: << parameters.variables >>
   CLOUDQA_SEQUENTIAL_EXECUTION: << parameters.is-sequential-execution >>
   CLOUDQA_ENVIRONMENT_NAME: << parameters.environment-name >>
 
 steps:
-  - run: sudo apt-get update && sudo apt-get install -y jq
-  - run: curl -O https://cquserfiles.s3.amazonaws.com/6394/28cb57ae611041d2a44ae2bcb3bbad66/cloudqa-app-circleci.sh
-  - run: bash cloudqa-app-circleci.sh
+  - run: |
+      sudo apt-get update && sudo apt-get install -y jq
+      curl -O https://cquserfiles.s3.amazonaws.com/6394/28cb57ae611041d2a44ae2bcb3bbad66/cloudqa-app-circleci.sh
+      bash cloudqa-app-circleci.sh
