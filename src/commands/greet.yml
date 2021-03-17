@@ -1,51 +1,15 @@
 description: >
-  Trigger your CloudQA test suite from a CircleCI build, passing in the suite `suite-id`,
-  optional `browser`, optional `build-tag`, optional `base-url`, optional `variables`,
-  optional `is-sequential-execution` and optional `environment-name` required for your suite.
-  Your `api-key` will be read from the environment variable `$CLOUDQA_API_KEY`
-  the test suite runner will pass or fail your build with the status of your suite. 
+  This command echos "Hello World" using file inclusion.
+# What will this command do?
+# Descriptions should be short, simple, and clear.
 parameters:
-  api-key:
+  to:
     type: string
-    description: Your CloudQA API key.
-  suite-id:
-    type: string
-    description: ID of the CloudQA suite to execute.
-  browser:
-    type: string
-    description: (optional) Modify the browser to execute your suite against, defaults to `Chrome`.
-    default: 'Chrome'
-  build-tag:
-    type: string
-    description: (optional) Modify the build tag to set build id of your suite, defaults to ``.
-    default: ''
-  base-url:
-    type: string
-    description: (optional) Modify the base url to execute your suite against, defaults to ``.
-    default: ''
-  variables:
-    type: string
-    description: (optional) Modify the variables to set variables of your suite, defaults to ``.
-    default: ''
-  is-sequential-execution:
-    type: boolean
-    description: (optional) Modify the is sequential execution to execution type(sequential, parallel) of your suite, defaults to `true`.
-    default: true
-  environment-name:
-    type: string
-    description: (optional) Modify the environment name to execute your suite against, defaults to ``.
-    default: ''
+    default: "World"
+    description: "Hello to whom?"
 steps:
-  - run: sudo apt-get update && sudo apt-get install -y jq
-  - run: curl -O https://cquserfiles.s3.amazonaws.com/6394/28cb57ae611041d2a44ae2bcb3bbad66/cloudqa-app-circleci.sh
-  - run: 
-     environment:
-       CLOUDQA_API_KEY: << parameters.api-key >>
-       CLOUDQA_SUITE_ID: << parameters.suite-id >>
-       CLOUDQA_BROWSER: << parameters.browser >>
-       CLOUDQA_BUILD_TAG: << parameters.build-tag >>
-       CLOUDQA_BASE_URL: << parameters.base-url >>
-       CLOUDQA_VARIABLES: << parameters.variables >>
-       CLOUDQA_SEQUENTIAL_EXECUTION: << parameters.is-sequential-execution >>
-       CLOUDQA_ENVIRONMENT_NAME: << parameters.environment-name >>
-     command: bash cloudqa-app-circleci.sh
+  - run:
+      environment:
+        PARAM_TO: <<parameters.to>>
+      name: Hello Greeting
+      command: <<include(scripts/greet.sh)>>

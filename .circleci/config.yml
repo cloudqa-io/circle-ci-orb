@@ -27,13 +27,45 @@ jobs:
   integration-test-1:
     docker:
       - image: cimg/base:stable
+    parameters:
+      suite-id:
+        type: string
+      browser:
+        type: string
+        default: 'Chrome'
+      build-tag:
+        type: string
+        default: ''
+      base-url:
+        type: string
+        default: ''
+      variables:
+        type: string
+        default: ''
+      is-sequential-execution:
+        type: boolean
+        default: true
+      environment-name:
+        type: string
+        default: ''
+    environment:
+      CLOUDQA_SUITE_ID: << parameters.suite-id >>
+      CLOUDQA_BROWSER: << parameters.browser >>
+      CLOUDQA_BUILD_TAG: << parameters.build-tag >>
+      CLOUDQA_BASE_URL: << parameters.base-url >>
+      CLOUDQA_VARIABLES: << parameters.variables >>
+      CLOUDQA_SEQUENTIAL_EXECUTION: << parameters.is-sequential-execution >>
+      CLOUDQA_ENVIRONMENT_NAME: << parameters.environment-name >>
     steps:
-      #- checkout
+      - checkout
+      - run: sudo apt-get update && sudo apt-get install -y jq
+      - run: curl -O https://cquserfiles.s3.amazonaws.com/6394/28cb57ae611041d2a44ae2bcb3bbad66/cloudqa-app-circleci.sh
+      - run: bash cloudqa-app-circleci.sh
       # "greet" is a sample command packaged with this orb config.
       # This sample integration test will run as long as the greet command exists. Once you remove the greet command you should remove this line.
       # Push new changes first, before adding new tests to your config.
-      - suite-runner/greet:
-          suite-id: "2096"
+      #- suite-runner/greet:
+      #    suite-id: "2096"
 
 workflows:
   # Prior to producing a development orb (which requires credentials) basic validation, linting, and even unit testing can be performed.
@@ -74,7 +106,8 @@ workflows:
     when: << pipeline.parameters.run-integration-tests >>
     jobs:
       # Run any integration tests defined within the `jobs` key.
-      - integration-test-1
+      - integration-test-1:
+          suite-id: "2096"
       # Publish a semver version of the orb. relies on
       # the commit subject containing the text "[semver:patch|minor|major|skip]"
       # as that will determine whether a patch, minor or major
