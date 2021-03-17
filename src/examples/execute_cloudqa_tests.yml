@@ -1,11 +1,11 @@
 description: >
-  Sample CloudQA suite execution.
+  Execute CloudQA test suites automatically be adding the `execute` job to your workflow.
 usage:
   version: 2.1
   orbs:
     suite-runner: cloudqa/suite-runner@1.0.0
   workflows:
-    use-my-orb:
+    test-my-app:
       jobs:
         - suite-runner/execute:
             suite-id: '<your-cloudqa-suite-id>'
