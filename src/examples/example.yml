@@ -7,4 +7,5 @@ usage:
   workflows:
     use-my-orb:
       jobs:
-        - suite-runner/hello
+        - suite-runner/execute:
+            suite-id: '<your-cloudqa-suite-id>'
