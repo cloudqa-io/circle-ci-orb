@@ -1,0 +1,11 @@
+description: >
+  This is a executor using Ubuntu Docker image.
+docker:
+  - image: 'cimg/base:<<parameters.tag>>'
+parameters:
+  tag:
+    default: '2021.03'
+    description: >
+      Pick a specific circleci/base image variant:
+      https://hub.docker.com/r/cimg/base/tags
+    type: string
