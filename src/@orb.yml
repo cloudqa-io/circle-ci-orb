@@ -4,4 +4,4 @@ description: >
   Automate Web Testing with CloudQA codeless selenium tests on CircleCI.
 display:
   home_url: "https://cloudqa.io/"
-  source_url: https://github.com/aqaptest/circleci-orb
+  source_url: https://github.com/cloudqa-io/circle-ci-orb
