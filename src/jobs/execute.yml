@@ -7,7 +7,14 @@ description: >
 
 docker:
   - image: 'cimg/base:<<parameters.image>>'
-  
+  parameters:
+    image:
+      default: 'stable'
+      description: >
+        Pick a specific circleci/base image variant:
+        https://hub.docker.com/r/cimg/base/tags
+      type: string
+
 parameters:
   suite-id:
     type: string
