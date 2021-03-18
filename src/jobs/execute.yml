@@ -34,7 +34,7 @@ parameters:
     default: ''
   image:
     type: string
-    descripting: >
+    description: >
       The Docker image for this job environment. CircleCI's `cimg/base:stable` will be used by default. Find other comptable images and tags here: https://hub.docker.com/u/cimg
     default: cimg/base:stable
 
