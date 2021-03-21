@@ -24,7 +24,7 @@ jobs:
   # Define one or more jobs which will utilize your orb's commands and parameters to validate your changes.
   integration-test-1:
     docker:
-      - image: cimg/base:<<parameters.image>>
+      - image: <<parameters.image>>
     parameters:
       suite-id:
         type: string
@@ -45,7 +45,7 @@ jobs:
         default: ''
       image:
         type: string
-        default: stable
+        default: cimg/base:stable
     environment:
       CLOUDQA_SUITE_ID: << parameters.suite-id >>
       CLOUDQA_BROWSER: << parameters.browser >>
