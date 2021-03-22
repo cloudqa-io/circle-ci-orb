@@ -15,7 +15,7 @@ Example executing a test suite:
 ```
 version: 2.1
   orbs:
-    suite-runner: cloudqa/suite-runner@2.0.2
+    suite-runner: cloudqa/suite-runner@2.0.3
   workflows:
     test-my-app:
       jobs:

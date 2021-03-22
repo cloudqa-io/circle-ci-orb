@@ -1,8 +1,8 @@
 description: >
-  Trigger your CloudQA test suite from CircleCI build by passing parameters "API Key","Suite Id",
+  Trigger your CloudQA test suite from CircleCI build by passing parameters "Suite Id",
   "Browser (optional)","Tag (optional)","Variables (optional)",
   "Sequential Execution (optional)" and "Environment Name (optional)".
-  CLOUDQA_API_KEY will be pulled from the CiricleCI build environment variables.
+  Note: CLOUDQA_API_KEY will be pulled from the CiricleCI build environment variables.
   Your build status depends on the test suite status.
 
 docker:
